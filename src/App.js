@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Anita's To-do App</h1>
+      <h1>TODO App</h1>
       <form>
         <FormControl>
           <InputLabel>Todo :</InputLabel>
