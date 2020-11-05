@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Todo from "./Todo";
+import db from "./firebase";
 
-function App() {
+const App = () => {
+  const [todoItem, setTodoItem] = useState([]);
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    db.collection("todos").onSnapshot((snapshot) => {
+      setTodoItem(snapshot.docs.map((doc) => doc.data().todo));
+    });
+  }, [todoItem]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <h1>Anita's To-do App</h1>
+      <form>
+        <FormControl>
+          <InputLabel>Todo :</InputLabel>
+          <Input value={input} onChange={(e) => setInput(e.target.value)} />
+        </FormControl>
+        <Button
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            if (input !== "") setTodoItem([...todoItem, input]);
+            setInput("");
+          }}
+          variant="contained"
+          color="primary"
         >
-          Learn React
-        </a>
-      </header>
+          Add Todo
+        </Button>
+      </form>
+      <ul>
+        {todoItem.map((todo) => (
+          <Todo todo={todo} />
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default App;
