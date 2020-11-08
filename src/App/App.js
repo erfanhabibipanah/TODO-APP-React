@@ -1,8 +1,9 @@
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Todo from "./Todo";
-import db from "./firebase";
+import Todo from "../TODO/Todo";
+import db from "../Firebase/firebase";
+import Footer from "../Footer/footer";
 
 const App = () => {
   const [todoItem, setTodoItem] = useState([]);
