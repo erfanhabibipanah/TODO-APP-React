@@ -2,4 +2,4 @@
 
 TODO List using React.
 
-Live Preview : https://www.todo-app.erfanhabibipanah.vercel.app
+Live Preview : https://todo-app.erfanhabibipanah.vercel.app
